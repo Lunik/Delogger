@@ -33,33 +33,33 @@ var Log = function () {
   _createClass(Log, [{
     key: 'info',
     value: function info(text) {
-      var string = '';
+      var string = '[' + getDate() + ']' + _colors2.default.green.bold(' [Info]\t');
       if (this.module) {
-        string = '[' + this.module + ']';
+        string += '[' + this.module + ']';
       }
-      string += '' + _colors2.default.green.bold('[Info] ') + text;
+      string += ' ' + text;
       this.echo(string);
       this.save(_colors2.default.strip(string));
     }
   }, {
     key: 'warning',
     value: function warning(text) {
-      var string = '';
+      var string = '[' + getDate() + ']' + _colors2.default.yellow.bold(' [Warning]\t');
       if (this.module) {
-        string = '[' + this.module + ']';
+        string += '[' + this.module + ']';
       }
-      string += '' + _colors2.default.yellow.bold('[Warning] ') + text;
+      string += ' ' + text;
       this.echo(string);
       this.save(_colors2.default.strip(string));
     }
   }, {
     key: 'error',
     value: function error(text) {
-      var string = '';
+      var string = '[' + getDate() + ']' + _colors2.default.red.bold(' [Error]\t');
       if (this.module) {
-        string = '[' + this.module + ']';
+        string += '[' + this.module + ']';
       }
-      string += '' + _colors2.default.red.bold('[Error] ') + text;
+      string += ' ' + text;
       this.echo(string);
       this.save(_colors2.default.strip(string));
     }
@@ -67,8 +67,10 @@ var Log = function () {
     key: 'save',
     value: function save(text) {
       if (this.path) {
-        _fs2.default.appendFile(getFile(this.path), '[' + getDate() + '] ' + text, function (err) {
-          console.error(err);
+        _fs2.default.appendFile(getFile(this.path), text + '\n', function (err) {
+          if (err) {
+            console.error(err);
+          }
         });
       }
     }
