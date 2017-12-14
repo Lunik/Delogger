@@ -30,7 +30,13 @@ var Log = function () {
     this.path = path;
 
     if (path) {
-      _fs2.default.writeFileSync(getFile(this.path, this.module), '');
+      try {
+        _fs2.default.writeFileSync(getFile(this.path, this.module), '', 'w');
+      } catch (e) {
+        if (e.code != 'EEXIST') {
+          console.error(e);
+        }
+      }
     }
   }
 
