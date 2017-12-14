@@ -28,6 +28,10 @@ var Log = function () {
 
     this.module = moduleName;
     this.path = path;
+
+    if (path) {
+      _fs2.default.writeFileSync(getFile(this.path, this.module), '');
+    }
   }
 
   _createClass(Log, [{
@@ -95,7 +99,7 @@ exports.default = Log;
 
 function getFile(savePath, moduleName) {
   var date = new Date();
-  return _path2.default.join(savePath, moduleName + '.log');
+  return _path2.default.join(savePath, moduleName.toLowerCase() + '.log');
 }
 
 function getDate() {

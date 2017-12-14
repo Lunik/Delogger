@@ -8,6 +8,16 @@ export default class Log {
   constructor (moduleName, path) {
     this.module = moduleName
     this.path = path
+
+    if (path) {
+      try {
+        fs.writeFileSync(getFile(this.path, this.module), '')
+      } catch (e) {
+        if (e.code != 'EEXIST') {
+          console.error(e)
+        }
+      }
+    }
   }
 
   info (text) {
@@ -58,7 +68,7 @@ export default class Log {
 
 function getFile (savePath, moduleName) {
   var date = new Date()
-  return path.join(savePath, `${moduleName}.log`)
+  return path.join(savePath, `${moduleName.toLowerCase()}.log`)
 }
 
 function getDate () {
