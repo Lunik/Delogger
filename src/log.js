@@ -40,7 +40,7 @@ export default class Log {
 
   save (text) {
     if (this.path) {
-      fs.appendFile(getFile(this.path), `${text}\n`, (err) => {
+      fs.appendFile(getFile(this.path, this.moduleName), `${text}\n`, (err) => {
         if (err) {
           console.error(err)
         }
@@ -56,20 +56,7 @@ export default class Log {
   }
 }
 
-function getFile (savePath) {
+function getFile (savePath, moduleName) {
   var date = new Date()
-  return path.join(savePath, `log-${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`)
-}
-
-function getDate () {
-  var date = new Date()
-  return formatDateNumbers(`${formatDateNumbers(date.getDate())}/${formatDateNumbers(date.getMonth() + 1)}/${formatDateNumbers(date.getFullYear())} ${formatDateNumbers(date.getHours())}:${formatDateNumbers(date.getMinutes())}:${formatDateNumbers(date.getSeconds())}`)
-}
-
-function formatDateNumbers (num) {
-  num = num.toString()
-  while (num.length < 2) {
-    num = `0${num}`
-  }
-  return num
+  return path.join(savePath, `${moduleName}.log`)
 }

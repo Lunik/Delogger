@@ -67,7 +67,7 @@ var Log = function () {
     key: 'save',
     value: function save(text) {
       if (this.path) {
-        _fs2.default.appendFile(getFile(this.path), text + '\n', function (err) {
+        _fs2.default.appendFile(getFile(this.path, this.moduleName), text + '\n', function (err) {
           if (err) {
             console.error(err);
           }
@@ -93,20 +93,7 @@ var Log = function () {
 exports.default = Log;
 
 
-function getFile(savePath) {
+function getFile(savePath, moduleName) {
   var date = new Date();
-  return _path2.default.join(savePath, 'log-' + date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear());
-}
-
-function getDate() {
-  var date = new Date();
-  return formatDateNumbers(formatDateNumbers(date.getDate()) + '/' + formatDateNumbers(date.getMonth() + 1) + '/' + formatDateNumbers(date.getFullYear()) + ' ' + formatDateNumbers(date.getHours()) + ':' + formatDateNumbers(date.getMinutes()) + ':' + formatDateNumbers(date.getSeconds()));
-}
-
-function formatDateNumbers(num) {
-  num = num.toString();
-  while (num.length < 2) {
-    num = '0' + num;
-  }
-  return num;
+  return _path2.default.join(savePath, moduleName + '.log');
 }
