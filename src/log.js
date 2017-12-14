@@ -40,7 +40,7 @@ export default class Log {
 
   save (text) {
     if (this.path) {
-      fs.appendFile(getFile(this.path, this.moduleName), `${text}\n`, (err) => {
+      fs.appendFile(getFile(this.path, this.module), `${text}\n`, (err) => {
         if (err) {
           console.error(err)
         }

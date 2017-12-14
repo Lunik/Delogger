@@ -67,7 +67,7 @@ var Log = function () {
     key: 'save',
     value: function save(text) {
       if (this.path) {
-        _fs2.default.appendFile(getFile(this.path, this.moduleName), text + '\n', function (err) {
+        _fs2.default.appendFile(getFile(this.path, this.module), text + '\n', function (err) {
           if (err) {
             console.error(err);
           }
