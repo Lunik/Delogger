@@ -31,7 +31,7 @@ var Log = function () {
 
     if (path) {
       try {
-        _fs2.default.writeFileSync(getFile(this.path, this.module), '', 'w');
+        _fs2.default.writeFileSync(getFile(this.path, this.module), '');
       } catch (e) {
         if (e.code != 'EEXIST') {
           console.error(e);
