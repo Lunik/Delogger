@@ -97,3 +97,16 @@ function getFile(savePath, moduleName) {
   var date = new Date();
   return _path2.default.join(savePath, moduleName + '.log');
 }
+
+function getDate() {
+  var date = new Date();
+  return formatDateNumbers(formatDateNumbers(date.getDate()) + '/' + formatDateNumbers(date.getMonth() + 1) + '/' + formatDateNumbers(date.getFullYear()) + ' ' + formatDateNumbers(date.getHours()) + ':' + formatDateNumbers(date.getMinutes()) + ':' + formatDateNumbers(date.getSeconds()));
+}
+
+function formatDateNumbers(num) {
+  num = num.toString();
+  while (num.length < 2) {
+    num = '0' + num;
+  }
+  return num;
+}
