@@ -13,7 +13,7 @@ export default class Log {
       try {
         fs.writeFileSync(getFile(this.path, this.module), '')
       } catch (e) {
-        if (e.code != 'EEXIST') {
+        if (e.code != 'EEXIST' && e.code != 'ENOENT') {
           console.error(e)
         }
       }
